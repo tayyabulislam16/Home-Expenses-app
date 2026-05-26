@@ -1,0 +1,19 @@
+{
+  "name": "home-expense-app",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run web -w mobile",
+    "dev:android": "npm run android -w mobile",
+    "dev:api": "npm run dev -w api",
+    "db:migrate:local": "npm run db:migrate:local -w api",
+    "db:migrate:remote": "npm run db:migrate:remote -w api"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

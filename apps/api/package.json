@@ -1,0 +1,26 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply expense_db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply expense_db --remote",
+    "typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@better-auth/core": "^1.2.0",
+    "better-auth": "^1.2.0",
+    "better-call": "^1.0.0",
+    "hono": "^4.6.0",
+    "kysely": "^0.27.4",
+    "kysely-d1": "^0.3.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250101.0",
+    "typescript": "^5.6.0",
+    "wrangler": "^3.95.0"
+  }
+}

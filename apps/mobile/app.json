@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Home Expenses",
+    "slug": "home-expenses",
+    "version": "0.1.0",
+    "scheme": "homeexpenses",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.homeexpenses.app" },
+    "android": {
+      "package": "com.homeexpenses.app",
+      "adaptiveIcon": { "backgroundColor": "#0F172A" }
+    },
+    "web": { "bundler": "metro", "output": "single" },
+    "plugins": ["expo-router"],
+    "experiments": { "typedRoutes": true }
+  }
+}

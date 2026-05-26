@@ -1,0 +1,21 @@
+name = "home-expense-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "expense_db"
+database_id = "REPLACE_AFTER_CREATE"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "RECEIPTS"
+bucket_name = "home-expense-receipts"
+
+[vars]
+WEB_ORIGIN = "http://localhost:8081"
+
+# Set with: wrangler secret put BETTER_AUTH_SECRET
+# wrangler secret put GOOGLE_CLIENT_ID
+# wrangler secret put GOOGLE_CLIENT_SECRET
