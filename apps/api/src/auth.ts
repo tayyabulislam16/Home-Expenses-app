@@ -14,18 +14,21 @@ export function createAuth(env: Env) {
     },
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.BETTER_AUTH_URL,
-    trustedOrigins: [env.WEB_ORIGIN],
+    trustedOrigins: env.WEB_ORIGIN.split(",").map((s) => s.trim()).filter(Boolean),
     emailAndPassword: {
       enabled: true,
       requireEmailVerification: false,
       minPasswordLength: 8,
     },
-    socialProviders: {
-      google: {
-        clientId: env.GOOGLE_CLIENT_ID,
-        clientSecret: env.GOOGLE_CLIENT_SECRET,
-      },
-    },
+    socialProviders:
+      env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && !env.GOOGLE_CLIENT_ID.startsWith("placeholder")
+        ? {
+            google: {
+              clientId: env.GOOGLE_CLIENT_ID,
+              clientSecret: env.GOOGLE_CLIENT_SECRET,
+            },
+          }
+        : undefined,
     advanced: {
       defaultCookieAttributes: {
         sameSite: "none",

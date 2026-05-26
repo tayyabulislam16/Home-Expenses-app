@@ -11,8 +11,9 @@ type Variables = {
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
 
 app.use("*", async (c, next) => {
+  const allowed = c.env.WEB_ORIGIN.split(",").map((s) => s.trim()).filter(Boolean);
   return cors({
-    origin: c.env.WEB_ORIGIN,
+    origin: (origin) => (allowed.includes(origin) ? origin : null),
     credentials: true,
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
