@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
 import { signIn, signUp } from "../../lib/auth-client";
 
@@ -33,11 +33,17 @@ export default function SignIn() {
   async function google() {
     setBusy(true);
     try {
-      const res = await signIn.social({
-        provider: "google",
-        callbackURL: "/(app)/expenses",
-      });
+      const callbackURL =
+        Platform.OS === "web"
+          ? `${window.location.origin}/`
+          : "homeexpenses://";
+      const res = await signIn.social({ provider: "google", callbackURL });
       if (res.error) throw new Error(res.error.message);
+      // Web: Better Auth returns { url, redirect } — navigate manually
+      if (Platform.OS === "web" && res.data && (res.data as any).url) {
+        window.location.href = (res.data as any).url;
+        return;
+      }
     } catch (e: any) {
       Alert.alert("Error", e.message ?? String(e));
     } finally {
